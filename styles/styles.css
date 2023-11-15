@@ -1,0 +1,60 @@
+body {
+    background: #f3f3f3;
+    font-family: arial, sans-serif;
+    font-size: 14px;
+    min-width: 715px;
+    min-height: 400px;
+}
+
+#loading {
+    display: block;
+    padding: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    background-color: #ffffff;
+}
+
+.concertDate,
+.concertName,
+.concertLocation {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.concertTRow:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.concertTRow:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.selectbox {
+    background: #fff;
+    color: #1d3b4a;
+    padding: 8px;
+    line-height: 18px;
+    border-radius: 4px;
+    border-width: 0 1px 4px;
+    border: 1px solid #ddd;
+    width: fit-content;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.daterangepicker .ranges li:last-child {
+    display: none;
+}
+
+.calendar-table,
+.drp-buttons,
+.drp-calendar {
+    display: none !important;
+}
