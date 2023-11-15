@@ -4,15 +4,35 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>London Concert Line-up</title>
+
+        <link rel="stylesheet" href="styles/datarangepicker.css" />
+        <link rel="stylesheet" href="styles/styles.css" />
     </head>
     <body>
         <div>
-            <h2>Upcoming London Concerts</h2>
-            <ul>
-                <li id="concerts"></li>
-            </ul>
+            <h2>Upcoming Concerts in London</h2>
+
+            <div id="reportrange" class="selectbox">
+                <i class="fa fa-calendar"></i>&nbsp; <span></span>
+                <i class="fa fa-caret-down"></i>
+            </div>
+
+            <table id="concerts">
+                <tr class="concertTRow">
+                    <th class="concertName">Concert Name</th>
+                    <th class="concertLocation">Concert Location</th>
+                    <th class="concertDate">Concert Date</th>
+                </tr>
+            </table>
+
+            <span id="loading">Loading...</span>
         </div>
 
-        <script src="script.js"></script>
+        <script src="scripts/jquery-3.2.1.min.js"></script>
+        <script src="scripts/moment.min.js"></script>
+        <script src="scripts/datarangepicker.min.js"></script>
+        <script src="scripts/fontawesome.min.js"></script>
+
+        <script src="scripts/main.js"></script>
     </body>
 </html>
