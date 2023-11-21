@@ -1,15 +1,16 @@
 // Api call
-async function fetchData(minDate, maxDate) {
+async function fetchData(date) {
     const url =
         "https://concerts-artists-events-tracker.p.rapidapi.com/location?name=London&minDate=" +
-        minDate +
+        date +
         "&maxDate=" +
-        maxDate;
+        date;
 
     const options = {
         method: "GET",
         headers: {
-            "X-RapidAPI-Key": "",
+            "X-RapidAPI-Key":
+                "fdc4447b6amsh4f6d92330bf9b70p10d629jsn382d7f08a2f0",
             "X-RapidAPI-Host": "concerts-artists-events-tracker.p.rapidapi.com",
         },
     };
@@ -17,7 +18,7 @@ async function fetchData(minDate, maxDate) {
     try {
         const response = await fetch(url, options);
         const result = await response.json();
-        console.log(result);
+
         displayConcerts(result);
     } catch (error) {
         console.error(error);
@@ -25,6 +26,13 @@ async function fetchData(minDate, maxDate) {
 }
 
 function displayConcerts(results) {
+    // clear table
+    let tableRows = document.querySelectorAll("#concerts tr");
+
+    tableRows.forEach((row) => {
+        row.remove();
+    });
+
     // Remove loading
     document.getElementById("loading").innerHTML = "";
 
@@ -45,36 +53,26 @@ function displayConcerts(results) {
         .insertAdjacentHTML("beforeend", concertHTMLResults);
 }
 
+function init(date) {
+    // Api call
+    fetchData(date.format("YYYY-M-D"));
+
+    // Set text on date input
+    $("#reportrange span").html(date.format("MMMM D, YYYY"));
+}
+
 (() => {
-    // Initialize date range picker
-    var end = moment().add(7, "days");
-    var start = moment();
-
-    function cb(start, end) {
-        // Api call
-        fetchData(start.format("YYYY-M-D"), end.format("YYYY-M-D"));
-
-        // const event = new Date("05 October 2011 14:48 UTC");
-
-        $("#reportrange span").html(
-            start.format("MMMM D, YYYY") + " - " + end.format("MMMM D, YYYY")
-        );
-    }
+    init(moment());
 
     $("#reportrange").daterangepicker(
         {
-            startDate: start,
-            endDate: end,
-            ranges: {
-                Today: [moment(), moment()],
-                Tomorrow: [moment(), moment().add(1, "days")],
-                "Next 7 Days": [moment(), moment().add(6, "days")],
-                "Next 30 Days": [moment(), moment().add(29, "days")],
-                "Next 60 Days": [moment(), moment().add(59, "days")],
-            },
+            singleDatePicker: true,
+            showDropdowns: true,
+            minYear: moment().year(),
+            maxYear: parseInt(moment().add(1, "years").format("YYYY"), 10),
         },
-        cb
+        function (start) {
+            fetchData(start.format("YYYY-M-D"));
+        }
     );
-
-    cb(start, end);
 })();

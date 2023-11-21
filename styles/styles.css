@@ -52,9 +52,3 @@ th {
 .daterangepicker .ranges li:last-child {
     display: none;
 }
-
-.calendar-table,
-.drp-buttons,
-.drp-calendar {
-    display: none !important;
-}
